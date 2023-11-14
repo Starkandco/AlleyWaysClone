@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://rnatvbd4aqu2"]
+
+[ext_resource type="Script" path="res://brick.gd" id="1_olpfr"]
+[ext_resource type="PackedScene" uid="uid://bqd140guwdo0o" path="res://bonus.tscn" id="2_55kwm"]
+[ext_resource type="Shader" path="res://brick.gdshader" id="2_ar8r6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwgmi"]
+resource_local_to_scene = true
+shader = ExtResource("2_ar8r6")
+shader_parameter/health = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2y41b"]
+resource_local_to_scene = true
+size = Vector2(40, 20)
+
+[node name="Brick" type="StaticBody2D" groups=["Brick"]]
+script = ExtResource("1_olpfr")
+bonus_scene = ExtResource("2_55kwm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_bwgmi")
+offset_right = 40.0
+offset_bottom = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(20, 10)
+shape = SubResource("RectangleShape2D_2y41b")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(20, 10)
+scale = Vector2(1, 10)

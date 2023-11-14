@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://c1khlx8da8pvk"]
+
+[ext_resource type="Script" path="res://Paddle.gd" id="1_smasv"]
+[ext_resource type="PackedScene" uid="uid://cjay85ktwjcye" path="res://ball.tscn" id="2_lfldj"]
+[ext_resource type="PackedScene" uid="uid://rnatvbd4aqu2" path="res://brick.tscn" id="3_87exk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rtm5"]
+size = Vector2(40, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qy51h"]
+size = Vector2(40, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wjyx"]
+size = Vector2(560, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2ohi"]
+size = Vector2(100, 30)
+
+[node name="Main" type="Node2D"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 480.0
+offset_bottom = 720.0
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+layout_mode = 0
+offset_top = 700.0
+offset_right = 480.0
+offset_bottom = 720.0
+color = Color(0.235294, 0.235294, 0.235294, 1)
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="LeftWallBody" type="StaticBody2D" parent="Boundaries"]
+
+[node name="LeftWall" type="CollisionShape2D" parent="Boundaries/LeftWallBody"]
+position = Vector2(-20, 360)
+shape = SubResource("RectangleShape2D_5rtm5")
+
+[node name="RightWallBody" type="StaticBody2D" parent="Boundaries"]
+
+[node name="RightWall" type="CollisionShape2D" parent="Boundaries/RightWallBody"]
+position = Vector2(500, 360)
+shape = SubResource("RectangleShape2D_qy51h")
+
+[node name="RoofBody" type="StaticBody2D" parent="Boundaries"]
+
+[node name="Roof" type="CollisionShape2D" parent="Boundaries/RoofBody"]
+position = Vector2(240, -20)
+shape = SubResource("RectangleShape2D_4wjyx")
+
+[node name="Elements" type="Node2D" parent="." groups=["elements"]]
+
+[node name="Paddle" type="CharacterBody2D" parent="Elements"]
+position = Vector2(0, 670)
+script = ExtResource("1_smasv")
+ball_scene = ExtResource("2_lfldj")
+
+[node name="PaddleDisplay" type="ColorRect" parent="Elements/Paddle"]
+offset_right = 100.0
+offset_bottom = 30.0
+
+[node name="PaddleShape" type="CollisionShape2D" parent="Elements/Paddle"]
+position = Vector2(50, 15)
+shape = SubResource("RectangleShape2D_p2ohi")
+
+[node name="Marker2D" type="Marker2D" parent="Elements/Paddle"]
+position = Vector2(40, -20)
+
+[node name="Brick" parent="Elements" instance=ExtResource("3_87exk")]
+position = Vector2(129, 163)
