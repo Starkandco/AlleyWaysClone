@@ -12,7 +12,8 @@ var levelLoaded
 var levelOne = [[0,0,0,0,0,1,0,0,0,0,0,0]]
 var levelTwo = [[0,0,0,0,0,1,1,0,0,0,0,0],[0,0,2,3,4,5,5,4,3,2,0,0],[0,0,1,1,1,1,1,1,1,1,0,0]]
 var levelThree = [[0,0,0,0,0,1,1,0,0,0,0,0],[0,0,6,7,8,9,9,8,7,6,0,0],[0,0,5,5,5,5,5,5,5,5,0,0]]
-var levels = {1:levelOne,2:levelTwo,3:levelThree}
+var levelFour = [[0,0,0,0,0,0,0,0,0,0,0,0],[0,1,1,1,0,0,0,0,1,1,1,0],[0,1,20,1,0,0,0,0,1,20,1,0],[0,1,1,1,0,0,0,0,1,1,1,0],[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,10,1,1,1,1,1,1,10,1,1],[1,1,10,1,1,1,1,1,1,10,1,1],[1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1],[0,1,1,1,1,30,30,1,1,1,1,0],[0,1,1,1,1,30,30,1,1,1,1,0],[0,0,0,1,1,1,1,1,1,0,0,0],[0,0,0,0,1,1,1,1,0,0,0,0]]
+var levels = {1:levelFour,2:levelTwo,3:levelThree}
 
 var ball
 
@@ -95,6 +96,7 @@ func set_new_timer(waitTime, method):
 	newT.wait_time = waitTime
 	newT.timeout.connect(method)
 	add_child(newT)
+	newT.one_shot = true
 	newT.start()
 
 func on_bonus_caught():
@@ -117,11 +119,6 @@ func on_bonus_caught():
 					newBall.global_position.x += 15
 					newBall.velocity = b.velocity
 					call_deferred("add_child", newBall)
-					for b2 in run_bonuses:
-						b2.add_collision_exception_with(newBall)
-					var balls2 = get_tree().get_nodes_in_group("Ball")
-					for b3 in balls2:
-						b3.add_collision_exception_with(newBall)
 		EXTRALIVES:
 			lives += 1
 			$UI/ColorRect/Lives.text = "Lives: " + str(lives)

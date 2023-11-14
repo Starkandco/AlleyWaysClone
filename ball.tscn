@@ -5,6 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_medui"]
 
 [node name="Ball" type="CharacterBody2D" groups=["Ball"]]
+collision_layer = 2
 script = ExtResource("1_3ribm")
 
 [node name="ColorRect" type="ColorRect" parent="."]

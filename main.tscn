@@ -90,6 +90,7 @@ shape = SubResource("RectangleShape2D_4wjyx")
 
 [node name="Paddle" type="CharacterBody2D" parent="Elements" groups=["Paddle"]]
 position = Vector2(0, 670)
+collision_mask = 3
 script = ExtResource("1_smasv")
 
 [node name="PaddleDisplay" type="ColorRect" parent="Elements/Paddle"]
